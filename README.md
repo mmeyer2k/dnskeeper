@@ -3,8 +3,8 @@ Dnskeeper
 A quick DNS switching tool for windows.
 
 ## Download Latest
-[Installer](https://github.com/mmeyer2k/dnskeeper/releases/download/latest/dnskeeper.exe) | 
-[Standalone EXE](https://github.com/mmeyer2k/dnskeeper/releases/download/latest/dnskeeper-installer.exe)
+[Installer](https://github.com/mmeyer2k/dnskeeper/releases/latest/download/dnskeeper.exe) | 
+[Standalone EXE](https://github.com/mmeyer2k/dnskeeper/releases/latest/download/dnskeeper-installer.exe)
 
 ## Screenshots
 <a href="https://raw.githubusercontent.com/mmeyer2k/dnskeeper/master/images/screen1.png" target="_blank">
