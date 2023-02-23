@@ -158,9 +158,9 @@ namespace dnskeeper
         {
             string key = @"SOFTWARE\Dnskeeper\Settings";
 
-            Registry.CurrentUser.CreateSubKey(key, true);
+            Registry.LocalMachine.CreateSubKey(key, true);
 
-            return Registry.CurrentUser.OpenSubKey(key, true);
+            return Registry.LocalMachine.OpenSubKey(key, true);
         }
 
         /// <summary>
@@ -171,9 +171,9 @@ namespace dnskeeper
         {
             string key = @"SOFTWARE\Dnskeeper\Profiles";
 
-            Registry.CurrentUser.CreateSubKey(key, true);
+            Registry.LocalMachine.CreateSubKey(key, true);
 
-            return Registry.CurrentUser.OpenSubKey(key, true);
+            return Registry.LocalMachine.OpenSubKey(key, true);
         }
 
         /// <summary>

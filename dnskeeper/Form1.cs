@@ -39,8 +39,11 @@ namespace dnskeeper
             menuProfiles.Enabled = false;
 
             // Autoload ethernet for now...
-            string autoload = Helpers.Settings().GetValue("Autoload")?.ToString() ?? "";
-            comboBox1.SelectedIndex = autoload == "" ? 0 : comboBox1.Items.IndexOf(autoload);
+            string autoload = Helpers.Settings().GetValue("Autoload")?.ToString();
+            if (autoload != null && comboBox1.Items.IndexOf(autoload) != -1)
+            {
+                comboBox1.SelectedIndex = comboBox1.Items.IndexOf(autoload);
+            }
         }
 
         #region Form events
@@ -128,9 +131,9 @@ namespace dnskeeper
 
             button1.Enabled =
                 textBox1.ForeColor != Color.Red &&
-                textBox1.ForeColor != Color.Red &&
-                textBox1.ForeColor != Color.Red &&
-                textBox1.ForeColor != Color.Red;
+                textBox2.ForeColor != Color.Red &&
+                textBox3.ForeColor != Color.Red &&
+                textBox4.ForeColor != Color.Red;
         }
         #endregion
 
@@ -141,7 +144,14 @@ namespace dnskeeper
 
             item.Checked = true;
 
-            Helpers.Settings().SetValue("Autoload", item.Text);
+            if (item.Text == "None")
+            {
+                Helpers.Settings().DeleteValue("Autoload");
+            }
+            else
+            {
+                Helpers.Settings().SetValue("Autoload", item.Text);
+            }
 
             DynamicMenuReload();
         }
@@ -185,7 +195,7 @@ namespace dnskeeper
         }
         private void NewProfileMenuItem_Click(object sender, EventArgs e)
         {
-            string prompt = $"IPv4:  {textBox1.Text}\nIPv4:  {textBox2.Text}\n\nIPv6:  {textBox3.Text}\nIPv6:  {textBox3.Text}\n\nCreate a name:";
+            string prompt = $"IPv4:  {textBox1.Text}\nIPv4:  {textBox2.Text}\n\nIPv6:  {textBox3.Text}\nIPv6:  {textBox4.Text}\n\nCreate a name:";
 
             string name = Interaction.InputBox(prompt, "Save new profile?", "New profile").Trim().ToString();
 
@@ -199,11 +209,6 @@ namespace dnskeeper
             if (Helpers.Profiles().GetValue(name)?.ToString().Length > 0)
             {
                 error = "An item with this name already exists in your saved profiles.";
-            }
-
-            if (Helpers.defaultProfiles.ContainsKey(name))
-            {
-                error = "This item's name conflicts with a default profile.";
             }
 
             if (error.Length > 0)
@@ -276,6 +281,7 @@ namespace dnskeeper
         {
             menuProfiles.MenuItems.Clear();
 
+            // Add "new profile" button to profiles menu
             MenuItem newProfile = new MenuItem("&New profile");
             newProfile.Click += new EventHandler(NewProfileMenuItem_Click);
             menuProfiles.MenuItems.Add(newProfile);
@@ -313,13 +319,27 @@ namespace dnskeeper
                 menuProfiles.MenuItems.Add(new MenuItem(profile.Key, ProfileMenuItem_Click));
             }
 
-            // Add interfaces to the auto-start list
+            // Clear adapter auto-load list
             menuAutoLoadAdapter.MenuItems.Clear();
+
+            // Get the currently saved autoload adapter
+            string selected = Helpers.Settings().GetValue("Autoload")?.ToString();
+
+            // Add the "none" option to the adapter auto-load list
+            menuAutoLoadAdapter.MenuItems.Add(new MenuItem("None", AutoloadAdapter_Click) {
+                Checked = selected == null,
+                Enabled = selected != null ,
+                RadioCheck = true,
+            });
+            menuAutoLoadAdapter.MenuItems.Add("-");
+
+            // Add interfaces to the adapter auto-load list
             foreach (NetworkInterface Adapter in Helpers.GetAdapters())
-            {
+            { 
                 menuAutoLoadAdapter.MenuItems.Add(new MenuItem(Adapter.Name, AutoloadAdapter_Click)
                 {
-                    Checked = Helpers.Settings().GetValue("Autoload")?.ToString() == Adapter.Name,
+                    Checked = selected == Adapter.Name,
+                    Enabled = selected != Adapter.Name,
                     RadioCheck = true,
                 });
             }

@@ -36,7 +36,7 @@ namespace dnskeeper
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(12, 259);
+            this.button2.Location = new System.Drawing.Point(129, 39);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(233, 27);
             this.button2.TabIndex = 1;
@@ -50,7 +50,7 @@ namespace dnskeeper
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(257, 299);
+            this.ClientSize = new System.Drawing.Size(412, 99);
             this.Controls.Add(this.button2);
             this.Font = new System.Drawing.Font("Symbol", 8.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -58,6 +58,7 @@ namespace dnskeeper
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form2";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "About dnskeeper";
