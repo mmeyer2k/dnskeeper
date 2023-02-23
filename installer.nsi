@@ -32,7 +32,7 @@ Section "" ;No components page, name is not important
   
   ; Put file there
   File dnskeeper\bin\Debug\dnskeeper.exe
-  File icons8-crab-96.ico
+  File images\icons8-crab-96.ico
   
   ; Write the uninstall keys for Windows
   WriteRegStr HKLM ${UNINSTREGKEY} "DisplayName" "Dnskeeper"
