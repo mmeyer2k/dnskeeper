@@ -270,7 +270,7 @@ namespace dnskeeper
             this.groupBox4.Size = new System.Drawing.Size(294, 51);
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "System IPv4 settings";
+            this.groupBox4.Text = "System IPv6 settings";
             // 
             // label4
             // 
